@@ -98,3 +98,20 @@
     background-color: #FFFFFF;
 
 }
+
+
+.input-error{
+    outline: 2px solid red;
+    box-shadow: 0px 0px 12px red;
+}
+
+.input-valid{
+    outline: 2px solid green;
+    box-shadow: 0px 0px 12px green;
+}
+
+.error{
+    color: red;
+    margin-top: -15px;
+    margin-left: 10px;
+}
