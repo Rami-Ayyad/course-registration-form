@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 const phoneNumberRegEx = /^01[0125][0-9]{8}$/gm;
 
-export const validarionSchema = yup.object().shape({
+export const validarionMainSchema = yup.object().shape({
     firstName:yup.string().min(3).required(),
     midName: yup.string().min(3),
     lastName: yup.string().min(3).required(),
@@ -15,4 +15,8 @@ export const validarionSchema = yup.object().shape({
     twitterProfile: yup.string(),
     facebookProfile: yup.string(),
     courses: yup.string().required()
+})
+
+export const emailOnlySchema = yup.object().shape({
+    email: yup.string().email("Please enter a valid email").required(),
 })

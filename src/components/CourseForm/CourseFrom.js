@@ -1,7 +1,7 @@
 import React from 'react'
 import './CourseFrom.css'
 import { useFormik } from 'formik'
-import { validarionSchema } from '../../helpers/validationSchema'
+import { validarionMainSchema } from '../../helpers/validationSchema'
 
 export const CourseFrom = () => {
 
@@ -9,6 +9,7 @@ export const CourseFrom = () => {
         console.log("submiteed")
         console.log(values)
         console.log(actions)
+        //need to clear feiled after submit & disable btn while submiting
     }
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -26,16 +27,9 @@ export const CourseFrom = () => {
             facebookProfile: "",
             courses: ""
         },
-        validationSchema: validarionSchema,
+        validationSchema: validarionMainSchema,
         onSubmit,
     })
-
-    console.log(errors)
-
-    const handleOnSubmit = (e) => {
-        e.preventDefault()
-        console.log("clicked")
-    }
 
     return (
         <div className='container'>
