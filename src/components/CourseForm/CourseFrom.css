@@ -1,15 +1,14 @@
-
-.container{
+.container {
     width: 60%;
     margin: 10px auto;
-    background-color: rgba(14, 28, 55,0.8);
+    background-color: rgba(14, 28, 55, 0.8);
     box-shadow: 0px 0px 8px #E6470D;
     border-radius: 15px;
     padding: 5px;
-    
+
 }
 
-.main-title{
+.main-title {
     text-align: center;
     color: #FFFFFF;
     background-color: rgba(255, 68, 0, 0.6);
@@ -18,16 +17,16 @@
     box-shadow: 0px 0px 8px #E6470D;
 }
 
-.form{
+.form {
     display: flex;
     margin: 10px auto;
     flex-direction: column;
     width: 70%;
     padding-left: 50px;
-    
+
 }
 
-.form input{
+.form input {
     max-width: 80%;
     height: 40px;
     margin: 5px 5px 20px 5px;
@@ -37,23 +36,23 @@
     font-size: 16px;
     font-weight: 600;
     background-color: white;
-    
-    
+
+
 }
 
-.form input:focus{
+.form input:focus {
     outline: 2px solid #E6470D;
     box-shadow: 0px 0px 8px #E6470D;
 }
 
-.form label{
+.form label {
     color: #FFFFFF;
     margin-left: 7px;
     font-size: 20px;
     font-weight: 600;
 }
 
-.form .select{
+.form .select {
     max-width: 80%;
     height: 40px;
     margin: 5px 5px 20px 5px;
@@ -63,16 +62,16 @@
     font-size: 16px;
     font-weight: 600;
     background-color: white;
-    
+
 }
 
 
-.form .select:focus{
+.form .select:focus {
     outline: 2px solid #E6470D;
     box-shadow: 0px 0px 8px #E6470D;
 }
 
-.submit-btn{
+.submit-btn {
     color: #FFFFFF;
     background-color: #E6470D;
     border: 2px solid #FFFFFF;
@@ -84,33 +83,33 @@
     font-size: 20px;
     font-weight: 800;
     transition: 250ms;
-    
+
 }
 
-.submit-btn:hover{
+.submit-btn:hover {
     color: #FFFFFF;
     background-color: #fd8052;
 
 }
 
-.submit-btn:active{
+.submit-btn:active {
     color: #E6470D;
     background-color: #FFFFFF;
 
 }
 
 
-.input-error{
+.input-error {
     outline: 2px solid red;
     box-shadow: 0px 0px 12px red;
 }
 
-.input-valid{
+.input-valid {
     outline: 2px solid green;
     box-shadow: 0px 0px 12px green;
 }
 
-.error{
+.error {
     color: red;
     margin-top: -15px;
     margin-left: 10px;

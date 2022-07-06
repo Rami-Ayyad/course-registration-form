@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -11,7 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./assets/18057944_sep11.jpg");
-  background-size:cover ;
+  background-size: cover;
   background-attachment: fixed;
 }
 

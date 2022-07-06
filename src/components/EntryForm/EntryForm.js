@@ -9,10 +9,13 @@ import { emailOnlySchema } from '../../helpers/validationSchema';
 
 export const EntryForm = () => {
 
+    const navigate = useNavigate()
+
     const onSubmit = (values, actions) => {
         console.log("submiteed")
         console.log(values)
         console.log(actions)
+        navigate('/course-from', { replace: false })
         //need to clear feiled after submit & disable btn while submiting
     }
 
@@ -23,10 +26,6 @@ export const EntryForm = () => {
         validationSchema: emailOnlySchema,
         onSubmit,
     })
-
-    console.log(errors)
-
-    const navigate = useNavigate()
 
     const handleOnSubmit = (e) => {
         e.preventDefault()
