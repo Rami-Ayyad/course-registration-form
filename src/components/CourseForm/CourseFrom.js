@@ -2,8 +2,11 @@ import React from 'react'
 import './CourseFrom.css'
 import { useFormik } from 'formik'
 import { validarionMainSchema } from '../../helpers/validationSchema'
+import { useUserContext } from '../../context/UserContext'
 
 export const CourseFrom = () => {
+
+    const { email, fName, lName } = useUserContext()
 
     const onSubmit = (values, actions) => {
         console.log("submiteed")
@@ -14,12 +17,12 @@ export const CourseFrom = () => {
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: {
-            firstName: "",
+            firstName: fName||"",
             midName: "",
-            lastName: "",
+            lastName: lName||"",
             phoneNumber: "",
             nationalID: "",
-            email: "",
+            email: email || "",
             address1: "",
             address2: "",
             linkedInProfile: "",
