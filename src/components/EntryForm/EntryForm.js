@@ -14,7 +14,7 @@ export const EntryForm = () => {
 
     const {
         signUp, setEmail, signUpWithGoogle,
-        signUpWithFacebook, setfName, setlName
+        signUpWithFacebook, setfName, setlName, setpNumber
     } = useUserContext()
 
     const navigate = useNavigate()
@@ -28,7 +28,7 @@ export const EntryForm = () => {
 
 
         } catch (error) {
-            console.log(error.message)
+            // console.log(error.message)
             errors.email = "this email have been used before !"
         }
 
@@ -47,16 +47,17 @@ export const EntryForm = () => {
         e.preventDefault()
         try {
             const res = await signUpWithGoogle()
-            console.log(res)
-            console.log(res._tokenResponse.firstName,res._tokenResponse.lastName)
+            // console.log(res)
+            // console.log(res._tokenResponse.firstName,res._tokenResponse.lastName)
             setEmail(res.user.email)
             setfName(res._tokenResponse.firstName)
             setlName(res._tokenResponse.lastName)
+            setpNumber(res.user.phoneNumber)
             navigate('/course-from', { replace: false })
 
         } catch (error) {
 
-            console.log(error.message)
+            // console.log(error.message)
             setBtnError(error.message)
         }
     }
@@ -65,12 +66,13 @@ export const EntryForm = () => {
         e.preventDefault()
         try {
             const res = await signUpWithFacebook()
-            console.log(res)
-            // setEmail(res.user.email)
-            // navigate('/course-from', { replace: false })
+            setEmail(res.user.email)
+            setfName(res._tokenResponse.firstName)
+            setlName(res._tokenResponse.lastName)
+            setpNumber(res.user.phoneNumber)
+            
 
         } catch (error) {
-            console.log(error.message)
             setBtnError(error.message)
         }
     }
@@ -79,17 +81,16 @@ export const EntryForm = () => {
     return (
         <div className='container'>
 
-            <h1 className='main-title'>Form Login</h1>
+            <h1 className='main-title'>Login to Registration Form</h1>
 
             <form onSubmit={handleSubmit} className='form'>
+
                 <label htmlFor='email'>Email :</label>
                 <input id='email' type='email' placeholder='Ex:jon@gmail.com'
                     value={values.email} onChange={handleChange} onBlur={handleBlur}
                     className={errors.email && touched.email ? "input-error" : "input-valid"} />
                 {errors.email && touched.email && <p className='error'>{errors.email}</p>}
 
-                {/* <label htmlFor='midName'>Paddword :</label>
-                <input id='midName' type='text' placeholder='Ex:Ned' /> */}
                 <button type='submit' className='submit-btn'>Continue with Email</button>
 
                 <button type='submit' className='submit-btn-gl' onClick={e => handleOnSubmitGL(e)}>

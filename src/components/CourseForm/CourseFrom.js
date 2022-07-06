@@ -1,28 +1,103 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './CourseFrom.css'
 import { useFormik } from 'formik'
 import { validarionMainSchema } from '../../helpers/validationSchema'
 import { useUserContext } from '../../context/UserContext'
+import { GrFacebook } from 'react-icons/gr'
+import { FcGoogle } from 'react-icons/fc'
+import { CloseButton } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
+
+
 
 export const CourseFrom = () => {
 
-    const { email, fName, lName } = useUserContext()
+    const [btnError, setBtnError] = useState("")
+    const [email, setEmail] = useState("")
+    const [fName, setfName] = useState("")
+    const [lName, setlName] = useState("")
+    const [pNumber, setpNumber] = useState("")
 
-    const onSubmit = (values, actions) => {
-        console.log("submiteed")
-        console.log(values)
-        console.log(actions)
-        //need to clear feiled after submit & disable btn while submiting
+    const navigate = useNavigate()
+
+    const { signUp, signUpWithGoogle, signUpWithFacebook } = useUserContext()
+
+    const onSubmit = async (values, actions) => {
+        try {
+            // console.log("submiteed")
+            // console.log(values.courses)
+            console.log(values, actions)
+            // const res = await signUp(values.email, "123456789")
+            // setEmail(res.user.email)
+            //need to clear feiled after submit & disable btn while submiting
+            actions.resetForm()
+            actions.setFieldValue("email","")
+            actions.setFieldValue("firstName","")
+            actions.setFieldValue("lastName","")
+
+        } catch (error) {
+            // console.log(error.message)
+            errors.email = "this email have been used before !"
+        }
     }
+
+    const handleOnSubmitGL = async (e) => {
+        e.preventDefault()
+        try {
+
+            navigate('/phone-validation', { replace: false })
+
+            const res = await signUpWithGoogle()
+            values.firstName = res._tokenResponse.firstName
+            values.lastName = res._tokenResponse.lastName
+            values.email = res.user.email
+            if (res.user.phoneNumber) { values.phoneNumber = res.user.phoneNumber }
+
+            setfName(res._tokenResponse.firstName)
+            setEmail(res.user.email)
+            setlName(res._tokenResponse.lastName)
+            if (res.user.phoneNumber) { setpNumber(res.user.phoneNumber) }
+
+            console.log(res)
+
+        } catch (error) {
+            setBtnError(error.message)
+        }
+    }
+
+
+
+
+    const handleOnSubmitFB = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await signUpWithFacebook()
+            values.firstName = res._tokenResponse.firstName
+            values.lastName = res._tokenResponse.lastName
+            values.email = res.user.email
+            if (res.user.phoneNumber) { values.phoneNumber = res.user.phoneNumber }
+
+            setfName(res._tokenResponse.firstName)
+            setEmail(res.user.email)
+            setlName(res._tokenResponse.lastName)
+            if (res.user.phoneNumber) { setpNumber(res.user.phoneNumber) }
+
+            console.log()
+
+        } catch (error) {
+            setBtnError(error.message)
+        }
+    }
+
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: {
-            firstName: fName||"",
+            firstName: "",
             midName: "",
-            lastName: lName||"",
-            phoneNumber: "",
+            lastName:"",
+            phoneNumber:  "",
             nationalID: "",
-            email: email || "",
+            email: "",
             address1: "",
             address2: "",
             linkedInProfile: "",
@@ -34,14 +109,33 @@ export const CourseFrom = () => {
         onSubmit,
     })
 
+
+
     return (
         <div className='container'>
 
             <h1 className='main-title'>Course Registration Form</h1>
 
+
+
             <h4 style={{ color: 'white', marginLeft: '20%' }}>* means field is required</h4>
 
             <form onSubmit={handleSubmit} className='form'>
+
+
+                <CloseButton className='submit-btn-gl' onClick={e => handleOnSubmitGL(e)}>
+                    Continue with Google account
+                    <FcGoogle size={30} style={{ backgroundColor: 'white', verticalAlign: '-8px', marginLeft: '10px' }} />
+                </CloseButton>
+                {btnError && <p className='error'>{btnError}</p>}
+
+                <button className='submit-btn-fb' onClick={e => handleOnSubmitFB(e)}>
+                    Continue with Facebook account
+                    <GrFacebook size={30} style={{ verticalAlign: '-8px', marginLeft: '10px' }} />
+                </button>
+                {btnError && <p className='error'>{btnError}</p>}
+
+
                 <label htmlFor='firstName'>*First Name :</label>
                 <input id='firstName' type='text' placeholder='Ex:Jon'
                     value={values.firstName} onChange={handleChange} onBlur={handleBlur}
@@ -109,11 +203,11 @@ export const CourseFrom = () => {
                 {errors.facebookProfile && touched.facebookProfile && <p className='error'>{errors.facebookProfile}</p>}
 
                 <label htmlFor='courses'>*Please Select Desired Course :</label>
-                <select id='courses' defaultValue='Select' className='select'
-                    value={values.courses} onChange={handleChange} onBlur={handleBlur} >
+                <select id='courses' className='select'
+                    defaultValue={"select"} onChange={handleChange} onBlur={handleBlur} >
 
 
-                    <option disabled>-- Select a course --</option>
+                    <option disabled value="select">-- Select a course --</option>
                     <option value='React.JS'>React.JS</option>
                     <option value='Angular'>Angular</option>
                     <option value='Flutter'>Flutter</option>
