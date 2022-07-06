@@ -15,6 +15,7 @@
     background-color: rgba(255, 68, 0, 0.6);
     border-radius: 10px;
     padding: 5px;
+    box-shadow: 0px 0px 8px #E6470D;
 }
 
 .form{
@@ -69,4 +70,31 @@
 .form .select:focus{
     outline: 2px solid #E6470D;
     box-shadow: 0px 0px 8px #E6470D;
+}
+
+.submit-btn{
+    color: #FFFFFF;
+    background-color: #E6470D;
+    border: 2px solid #FFFFFF;
+    max-width: 80%;
+    height: 60px;
+    margin: 20px 5px 20px 5px;
+    padding: 5px 5px;
+    border-radius: 7px;
+    font-size: 20px;
+    font-weight: 800;
+    transition: 250ms;
+    
+}
+
+.submit-btn:hover{
+    color: #FFFFFF;
+    background-color: #fd8052;
+
+}
+
+.submit-btn:active{
+    color: #E6470D;
+    background-color: #FFFFFF;
+
 }
