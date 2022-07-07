@@ -8,14 +8,11 @@ import { FcGoogle } from 'react-icons/fc'
 import { CloseButton } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../services/firebase'
-import { collection, getDocs, addDoc } from 'firebase/firestore'
+import { collection } from 'firebase/firestore'
 
 
 
 export const CourseFrom = () => {
-
-
-    const usersCollectionRed = collection(db, "users")
 
     const [isValidatingCaptcha, setIsValidatingCaptcha] = useState(false)
     const [btnError, setBtnError] = useState("")
@@ -40,17 +37,18 @@ export const CourseFrom = () => {
             setIsValidatingCaptcha(true)
             setSubmitedData({...values})
 
-            // const response = await setupRecaptcha(values.phoneNumber)
-            // setConfirmObj(response)
+            const response = await setupRecaptcha(values.phoneNumber)
+            setConfirmObj(response)
             
             navigate('/phone-validation', { replace: false })
-            setIsValidatingCaptcha(false)
-
+            
 
             actions.resetForm()
             actions.setFieldValue("email","")
             actions.setFieldValue("firstName","")
             actions.setFieldValue("lastName","")
+
+ 
 
 
         } catch (error) {

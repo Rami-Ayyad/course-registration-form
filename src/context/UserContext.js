@@ -20,10 +20,12 @@ export function UserContextProvider({ children }) {
     const [confirmObj, setConfirmObj] = useState("")
     const [submitedData, setSubmitedData] = useState({})
 
+
     function setupRecaptcha(pNumber) {
+        //automatic invisible recaptcha validation
         const recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
             'size': 'invisible',
-          }, auth)
+        }, auth)
         return signInWithPhoneNumber(auth, pNumber, recaptchaVerifier)
     }
 

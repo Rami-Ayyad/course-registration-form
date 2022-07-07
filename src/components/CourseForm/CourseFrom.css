@@ -135,6 +135,10 @@
 
 }
 
+.submit-btn:disabled {
+    background-color: rgb(170, 163, 160);
+}
+
 
 .input-error {
     outline: 2px solid red;
@@ -152,7 +156,7 @@
     margin-left: 10px;
 }
 
-.sending-code-msg{
+.sending-code-msg {
     color: #FFFFFF;
     margin-top: -15px;
     margin-left: 10px;

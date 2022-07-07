@@ -1,11 +1,17 @@
-.submit-btn:disabled{
+.submit-btn:disabled {
     background-color: rgb(170, 163, 160);
 }
 
-.form .otp-input{
+.form .otp-input {
     text-align: center;
-    letter-spacing:20px;
+    letter-spacing: 20px;
     font-weight: bold;
     font-size: 25px;
     color: rgb(51, 47, 47);
+}
+
+.sending-code-msg {
+    color: #FFFFFF;
+    margin-top: -15px;
+    margin-left: 10px;
 }
