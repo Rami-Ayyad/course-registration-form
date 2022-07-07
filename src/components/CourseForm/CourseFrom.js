@@ -7,13 +7,17 @@ import { GrFacebook } from 'react-icons/gr'
 import { FcGoogle } from 'react-icons/fc'
 import { CloseButton } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../services/firebase'
+import { collection, getDocs, addDoc } from 'firebase/firestore'
 
 
 
 export const CourseFrom = () => {
 
+
+    const usersCollectionRed = collection(db, "users")
+
     const [isValidatingCaptcha, setIsValidatingCaptcha] = useState(false)
-    // const [confirmObj, setConfirmObj] = useState("")
     const [btnError, setBtnError] = useState("")
     const [email, setEmail] = useState("")
     const [fName, setfName] = useState("")
@@ -21,30 +25,36 @@ export const CourseFrom = () => {
 
     const navigate = useNavigate()
 
-    const { signUp, signUpWithGoogle, signUpWithFacebook, setupRecaptcha, setConfirmObj } = useUserContext()
+    const { 
+        signUp, signUpWithGoogle, signUpWithFacebook,
+        setupRecaptcha, setConfirmObj,
+        submitedData, setSubmitedData
+    } = useUserContext()
+
+
+
 
     const onSubmit = async (values, actions) => {
         try {
-            setIsValidatingCaptcha(true)
-            const response = await setupRecaptcha(values.phoneNumber)
-            setConfirmObj(response)
-            console.log(response)
-            // console.log("submiteed")
-            // console.log(values.courses)
-            console.log(values, actions)
-            setIsValidatingCaptcha(false)
-            navigate('/phone-validation', { replace: false })
-            // const res = await signUp(values.email, "123456789")
-            // setEmail(res.user.email)
-            //need to clear feiled after submit & disable btn while submiting
 
-            // actions.resetForm()
-            // actions.setFieldValue("email","")
-            // actions.setFieldValue("firstName","")
-            // actions.setFieldValue("lastName","")
+            setIsValidatingCaptcha(true)
+            setSubmitedData({...values})
+
+            // const response = await setupRecaptcha(values.phoneNumber)
+            // setConfirmObj(response)
+            
+            navigate('/phone-validation', { replace: false })
+            setIsValidatingCaptcha(false)
+
+
+            actions.resetForm()
+            actions.setFieldValue("email","")
+            actions.setFieldValue("firstName","")
+            actions.setFieldValue("lastName","")
+
 
         } catch (error) {
-            console.log(error.message)
+
             errors.email = "this email have been used before !"
         }
     }
@@ -63,8 +73,6 @@ export const CourseFrom = () => {
             setEmail(res.user.email)
             setlName(res._tokenResponse.lastName)
 
-
-            console.log(res)
 
         } catch (error) {
             setBtnError(error.message)
@@ -86,8 +94,6 @@ export const CourseFrom = () => {
             setEmail(res.user.email)
             setlName(res._tokenResponse.lastName)
 
-            console.log()
-
         } catch (error) {
             setBtnError(error.message)
         }
@@ -107,7 +113,7 @@ export const CourseFrom = () => {
             linkedInProfile: "",
             twitterProfile: "",
             facebookProfile: "",
-            courses: ""
+            selectedCourse: ""
         },
         validationSchema: validarionMainSchema,
         onSubmit,
@@ -122,7 +128,7 @@ export const CourseFrom = () => {
 
 
 
-            <h4 style={{ color: 'white', marginLeft: '20%' }}>* means field is required</h4>
+            <h4 style={{ color: 'white', marginLeft: '22%' }}>This sign * means field is required</h4>
 
             <form onSubmit={handleSubmit} className='form'>
 
@@ -206,8 +212,8 @@ export const CourseFrom = () => {
                     className={errors.facebookProfile && touched.facebookProfile ? "input-error" : "input-valid"} />
                 {errors.facebookProfile && touched.facebookProfile && <p className='error'>{errors.facebookProfile}</p>}
 
-                <label htmlFor='courses'>*Please Select Desired Course :</label>
-                <select id='courses' className='select'
+                <label htmlFor='selectedCourse'>*Please Select Desired Course :</label>
+                <select id='selectedCourse' className='select'
                     defaultValue={"select"} onChange={handleChange} onBlur={handleBlur} >
 
 
@@ -218,9 +224,9 @@ export const CourseFrom = () => {
                     <option value='Kotlin'>Kotlin</option>
 
                 </select>
-                {errors.courses && touched.courses && <p className='error'>{errors.courses}</p>}
+                {errors.selectedCourse && touched.selectedCourse && <p className='error'>{errors.selectedCourse}</p>}
 
-                <button  id="sign-in-button" type='submit' className='submit-btn' >Register Course</button>
+                <button disabled={isValidatingCaptcha}  id="sign-in-button" type='submit' className='submit-btn' >Register Course</button>
                 {isValidatingCaptcha && <h3 className='sending-code-msg'>Sending Validation Code To your Phone ...</h3>}
 
             </form>

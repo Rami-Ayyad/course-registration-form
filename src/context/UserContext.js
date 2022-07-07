@@ -18,6 +18,7 @@ export function UserContextProvider({ children }) {
     const [fName, setfName] = useState("")
     const [lName, setlName] = useState("")
     const [confirmObj, setConfirmObj] = useState("")
+    const [submitedData, setSubmitedData] = useState({})
 
     function setupRecaptcha(pNumber) {
         const recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
@@ -44,7 +45,7 @@ export function UserContextProvider({ children }) {
         <userContext.Provider value={{
             signUp, email, setEmail, signUpWithGoogle, signUpWithFacebook,
             fName, setfName, lName, setlName, setupRecaptcha, confirmObj,
-            setConfirmObj
+            setConfirmObj, submitedData, setSubmitedData
         }}>
             {children}
         </userContext.Provider>

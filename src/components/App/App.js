@@ -1,9 +1,9 @@
 import './App.css';
 import { CourseFrom } from "../CourseForm/CourseFrom";
-import { EntryForm } from '../EntryForm/EntryForm';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserContextProvider } from '../../context/UserContext';
 import { PhoneOTP } from '../PhoneOTP/PhoneOTP';
+import StudentsTable from '../StudentsTable/StudentsTable';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
 
           <Route path="/" element={<CourseFrom />} />
           <Route path="/phone-validation" element={<PhoneOTP/>} />
+          <Route path="/studetns-table" element={<StudentsTable/>}/>
 
         </Routes>
 

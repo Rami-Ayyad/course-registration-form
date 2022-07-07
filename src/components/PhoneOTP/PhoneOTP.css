@@ -1,0 +1,11 @@
+.submit-btn:disabled{
+    background-color: rgb(170, 163, 160);
+}
+
+.form .otp-input{
+    text-align: center;
+    letter-spacing:20px;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(51, 47, 47);
+}
