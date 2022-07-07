@@ -3,7 +3,9 @@ import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
     FacebookAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    RecaptchaVerifier,
+    signInWithPhoneNumber
 } from "firebase/auth";
 import { auth } from "../services/firebase";
 
@@ -15,7 +17,14 @@ export function UserContextProvider({ children }) {
     const [email, setEmail] = useState("")
     const [fName, setfName] = useState("")
     const [lName, setlName] = useState("")
-    const [pNumber, setpNumber] = useState("")
+    const [confirmObj, setConfirmObj] = useState("")
+
+    function setupRecaptcha(pNumber) {
+        const recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+            'size': 'invisible',
+          }, auth)
+        return signInWithPhoneNumber(auth, pNumber, recaptchaVerifier)
+    }
 
     function signUp(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -34,7 +43,8 @@ export function UserContextProvider({ children }) {
     return (
         <userContext.Provider value={{
             signUp, email, setEmail, signUpWithGoogle, signUpWithFacebook,
-            fName, setfName, lName, setlName, pNumber, setpNumber
+            fName, setfName, lName, setlName, setupRecaptcha, confirmObj,
+            setConfirmObj
         }}>
             {children}
         </userContext.Provider>

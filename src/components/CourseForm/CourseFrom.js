@@ -12,31 +12,39 @@ import { useNavigate } from 'react-router-dom';
 
 export const CourseFrom = () => {
 
+    const [isValidatingCaptcha, setIsValidatingCaptcha] = useState(false)
+    // const [confirmObj, setConfirmObj] = useState("")
     const [btnError, setBtnError] = useState("")
     const [email, setEmail] = useState("")
     const [fName, setfName] = useState("")
     const [lName, setlName] = useState("")
-    const [pNumber, setpNumber] = useState("")
 
     const navigate = useNavigate()
 
-    const { signUp, signUpWithGoogle, signUpWithFacebook } = useUserContext()
+    const { signUp, signUpWithGoogle, signUpWithFacebook, setupRecaptcha, setConfirmObj } = useUserContext()
 
     const onSubmit = async (values, actions) => {
         try {
+            setIsValidatingCaptcha(true)
+            const response = await setupRecaptcha(values.phoneNumber)
+            setConfirmObj(response)
+            console.log(response)
             // console.log("submiteed")
             // console.log(values.courses)
             console.log(values, actions)
+            setIsValidatingCaptcha(false)
+            navigate('/phone-validation', { replace: false })
             // const res = await signUp(values.email, "123456789")
             // setEmail(res.user.email)
             //need to clear feiled after submit & disable btn while submiting
-            actions.resetForm()
-            actions.setFieldValue("email","")
-            actions.setFieldValue("firstName","")
-            actions.setFieldValue("lastName","")
+
+            // actions.resetForm()
+            // actions.setFieldValue("email","")
+            // actions.setFieldValue("firstName","")
+            // actions.setFieldValue("lastName","")
 
         } catch (error) {
-            // console.log(error.message)
+            console.log(error.message)
             errors.email = "this email have been used before !"
         }
     }
@@ -45,18 +53,16 @@ export const CourseFrom = () => {
         e.preventDefault()
         try {
 
-            navigate('/phone-validation', { replace: false })
 
             const res = await signUpWithGoogle()
             values.firstName = res._tokenResponse.firstName
             values.lastName = res._tokenResponse.lastName
             values.email = res.user.email
-            if (res.user.phoneNumber) { values.phoneNumber = res.user.phoneNumber }
 
             setfName(res._tokenResponse.firstName)
             setEmail(res.user.email)
             setlName(res._tokenResponse.lastName)
-            if (res.user.phoneNumber) { setpNumber(res.user.phoneNumber) }
+
 
             console.log(res)
 
@@ -75,12 +81,10 @@ export const CourseFrom = () => {
             values.firstName = res._tokenResponse.firstName
             values.lastName = res._tokenResponse.lastName
             values.email = res.user.email
-            if (res.user.phoneNumber) { values.phoneNumber = res.user.phoneNumber }
 
             setfName(res._tokenResponse.firstName)
             setEmail(res.user.email)
             setlName(res._tokenResponse.lastName)
-            if (res.user.phoneNumber) { setpNumber(res.user.phoneNumber) }
 
             console.log()
 
@@ -155,7 +159,7 @@ export const CourseFrom = () => {
                 {errors.lastName && touched.lastName && <p className='error'>{errors.lastName}</p>}
 
                 <label htmlFor='phoneNumber'>*Phone Number :</label>
-                <input id='phoneNumber' type='tel' placeholder='Ex:011*****577'
+                <input id='phoneNumber' type='tel' placeholder='Ex:+2011*****577'
                     value={values.phoneNumber} onChange={handleChange} onBlur={handleBlur}
                     className={errors.phoneNumber && touched.phoneNumber ? "input-error" : "input-valid"} />
                 {errors.phoneNumber && touched.phoneNumber && <p className='error'>{errors.phoneNumber}</p>}
@@ -216,8 +220,8 @@ export const CourseFrom = () => {
                 </select>
                 {errors.courses && touched.courses && <p className='error'>{errors.courses}</p>}
 
-                <button type='submit' className='submit-btn' >Register Course</button>
-                {/* onClick={e => handleOnSubmit(e)} */}
+                <button  id="sign-in-button" type='submit' className='submit-btn' >Register Course</button>
+                {isValidatingCaptcha && <h3 className='sending-code-msg'>Sending Validation Code To your Phone ...</h3>}
 
             </form>
         </div>

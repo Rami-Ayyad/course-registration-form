@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const phoneNumberRegEx = /^01[0125][0-9]{8}$/gm;
+const phoneNumberRegEx = /^[+]201[0125][0-9]{8}$/gm;
 
 export const validarionMainSchema = yup.object().shape({
     firstName: yup.string().min(3).required(),
