@@ -135,11 +135,6 @@
 
 }
 
-.submit-btn:disabled {
-    background-color: rgb(170, 163, 160);
-}
-
-
 .input-error {
     outline: 2px solid red;
     box-shadow: 0px 0px 12px red;
@@ -160,4 +155,9 @@
     color: #FFFFFF;
     margin-top: -15px;
     margin-left: 10px;
+}
+
+
+.submit-btn:disabled {
+    background-color: rgb(170, 163, 160);
 }

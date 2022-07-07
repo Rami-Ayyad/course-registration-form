@@ -7,8 +7,7 @@ import { GrFacebook } from 'react-icons/gr'
 import { FcGoogle } from 'react-icons/fc'
 import { CloseButton } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../services/firebase'
-import { collection } from 'firebase/firestore'
+
 
 
 
@@ -23,9 +22,8 @@ export const CourseFrom = () => {
     const navigate = useNavigate()
 
     const { 
-        signUp, signUpWithGoogle, signUpWithFacebook,
-        setupRecaptcha, setConfirmObj,
-        submitedData, setSubmitedData
+        signUpWithGoogle, signUpWithFacebook,
+        setupRecaptcha, setConfirmObj, setSubmitedData
     } = useUserContext()
 
 
@@ -36,24 +34,21 @@ export const CourseFrom = () => {
 
             setIsValidatingCaptcha(true)
             setSubmitedData({...values})
-
+         
             const response = await setupRecaptcha(values.phoneNumber)
             setConfirmObj(response)
             
-            navigate('/phone-validation', { replace: false })
-            
-
             actions.resetForm()
             actions.setFieldValue("email","")
             actions.setFieldValue("firstName","")
             actions.setFieldValue("lastName","")
 
- 
+            navigate('/phone-validation', { replace: false })
 
 
         } catch (error) {
 
-            errors.email = "this email have been used before !"
+            setIsValidatingCaptcha(true)
         }
     }
 

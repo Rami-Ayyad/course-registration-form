@@ -21,7 +21,7 @@ export const PhoneOTP = () => {
         e.preventDefault()
 
         if (otp === "" || otp === null) return
-        
+
         if (!confirmObj) {
             setErrorMsg("Incorrect Code")
             return
@@ -34,9 +34,12 @@ export const PhoneOTP = () => {
 
             const adding = await addDoc(usersCollectionRed, submitedData)
             setSuccessFlag(true)
+            setValidatinFlag(false)
         }
         catch (error) {
+            
             setErrorMsg(error.message)
+            setValidatinFlag(false)
         }
     }
 
