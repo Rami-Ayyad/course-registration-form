@@ -31,7 +31,7 @@ export default function StudentsTable() {
                     </tr>
                     {students.length && students.map(student => (
 
-                        <tr>
+                        <tr key={student.id}>
                             <td>{student.firstName}</td>
                             <td>{student.lastName}</td>
                             <td>{student.selectedCourse}</td>
