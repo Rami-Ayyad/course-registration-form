@@ -13,13 +13,11 @@ export default function StudentsTable() {
         const getStudents = async () => {
             const data = await getDocs(usersCollectionRed)
             setStudent(data.docs.map(doc => doc.data()))
-            console.log(students)
         }
         getStudents()
 
     }, [])
 
-    console.log(students)
     return (
         <div>
             <div className='container'>

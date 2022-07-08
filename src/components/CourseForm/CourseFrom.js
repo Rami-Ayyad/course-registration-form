@@ -37,17 +37,18 @@ export const CourseFrom = () => {
          
             const response = await setupRecaptcha(values.phoneNumber)
             setConfirmObj(response)
-            
+
+            navigate('/phone-validation', { replace: false })
+
             actions.resetForm()
             actions.setFieldValue("email","")
             actions.setFieldValue("firstName","")
             actions.setFieldValue("lastName","")
 
-            navigate('/phone-validation', { replace: false })
+            
 
 
         } catch (error) {
-
             setIsValidatingCaptcha(true)
         }
     }
