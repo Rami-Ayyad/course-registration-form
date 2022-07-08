@@ -1,4 +1,5 @@
 # Analysis Chart App :
+![screenShoot](demoPic.png)
 #### Basic Usage :
 - A registratoin form that allows the student to choose a desired course after filling the form with correct data either manually or by Google / Facebook acount ,
 The from sends validation code via SMS to student's phone for authentication.
