@@ -17,6 +17,7 @@ The from sends validation code via SMS to student's phone for authentication.
 
 ## Features :
 - Ability to fill form by Google / Facebook accuonts.
+- Required fields are marked with ( * ) sign.
 - Validation on all fields.
 - informative plcadeholders that guide users to the correct format of inputs.
 - Error messages to inform user incase if wrong or invalid data input.
