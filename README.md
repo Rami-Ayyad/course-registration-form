@@ -19,10 +19,10 @@ The from sends validation code via SMS to student's phone for authentication.
 - Validation on all fields.
 - informative plcadeholders that guide users to the correct format of inputs.
 - Error messages to inform user incase if wrong or invalid data input.
-- Loading message to inorm user while sending/retrieving data from data base.
+- Loading message to inform user while sending/retrieving data from data base.
 - Submit buttons are disabled during loading phases.
 - User isn't added to database untill he enters the correct code sent via SMS to his phone.
-- User have the option to checkout other students courses after registration is complete (the purpose to showing data from data base)
+- User have the option to checkout other students courses after registration is complete (the purpose to showing data from data base).
 
  ## Notes :
 - Firebase has a limit for requests per minute, after that it throws an error, if such case happened please wait an hour or so and try again.
