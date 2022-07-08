@@ -12,7 +12,7 @@ The from sends validation code via SMS to student's phone for authentication.
 - Formik, Yup, React-icons, Firebase
 
 ## Live Demo :
-https://courses-registration-form.netlify.app/
+## https://courses-registration-form.netlify.app/
 
 ## Features :
 - Ability to fill form by Google / Facebook accuonts.
