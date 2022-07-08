@@ -3,8 +3,8 @@
 - A registratoin form that allows the student to choose a desired course after filling the form with correct data either manually or by Google / Facebook acount ,
 The from sends validation code via SMS to student's phone for authentication.
 #### installation :
-- start by installing all the dependenties by running `npm install`
-- launching the app on a local server by running `npm start`
+- Start by installing all the dependenties by running `npm install`
+- Launching the app on a local server by running `npm start`
 
 ## Technologies and Libraries :
 - HTML5,   CSS3,  JavaScript
@@ -32,4 +32,6 @@ The from sends validation code via SMS to student's phone for authentication.
 - 'Prettier' was used for code formating.
 - Background image is a freestock image form 'Google Images'.
 - Design and colors of applicatoin wasn't copied (improvised by me).
+- When fill from by Google/Facebook, not all field are filled with retrieved data and some fields are left empty for user to manually fill.
+
 
